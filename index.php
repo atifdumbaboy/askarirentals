@@ -1,13 +1,12 @@
 <?php
+session_start();
 include_once('connection.php');
 
 // fetching queries
 $sql = "SELECT * FROM homes";
-$lahoresql = "SELECT * FROM homes WHERE Location='Lahore'";
 
 //storage
 $result = $mysqli->query($sql);
-$lahore = $mysqli->query($lahoresql);
 ?>
 
 <?php // Include the header
@@ -54,35 +53,58 @@ include('header.php');
             echo "Floors: " . $row['Floors'] . "<br>";
             echo "Area: " . $row['Area'] . "<br>";
             echo "Contact: " . $row['Contact'] . "<br>";
-            echo "</li>";
-        }
-        ?>
-    </ul>
-    <h2>Homes in Lahore</h2>
-    <ul>
-        <?php
-        // Loop through the results and display each home
-        while ($row = $lahore->fetch_assoc()) {
-            echo "<li>";
-            if ($row['Picture'] == null || $row['Picture'] == '') {
-                // No image available
-            } else {
-                echo "<img src='media/" . $row['Picture'] . "' style='width:100px;height:auto;' />";
-            }
-            echo "<br>";
-            echo "Location: " . $row['Location'] . "<br>";
-            echo "Price: " . $row['Price'] . "<br>";
-            echo "Owner: " . $row['Owner'] . "<br>";
-            echo "Rooms: " . $row['Rooms'] . "<br>";
-            echo "Bathrooms: " . $row['Bathrooms'] . "<br>";
-            echo "Floors: " . $row['Floors'] . "<br>";
-            echo "Area: " . $row['Area'] . "<br>";
-            echo "Contact: " . $row['Contact'] . "<br>";
+            echo "<a href='details.php?id=" . $row['id'] . "'>More Details</a>"; // Use $row['ID'] here
             echo "</li>";
         }
         ?>
     </ul>
 </div>
+<?php
+// displaying homes by location now
+$sql = "SELECT * FROM homes";
+$result = $mysqli->query($sql);
+
+// Grouping homes by location
+$homesByLocation = array();
+while ($row = $result->fetch_assoc()) {
+    $location = $row['Location'];
+    if (!isset($homesByLocation[$location])) {
+        $homesByLocation[$location] = array();
+    }
+    $homesByLocation[$location][] = $row;
+}
+?>
+<div class="homes-list">
+    <?php
+    foreach ($homesByLocation as $location => $locationHomes) {
+        echo "<h2>Homes in $location</h2>";
+        echo "<ul>";
+        foreach ($locationHomes as $home) {
+            echo "<li>";
+            if ($home['Picture'] == null || $home['Picture'] == '') {
+                // No image available
+            } else {
+                echo "<img src='media/" . $home['Picture'] . "' style='width:100px;height:auto;' />";
+            }
+            echo "<br>";
+            echo "Location: " . $home['Location'] . "<br>";
+            echo "Price: " . $home['Price'] . "<br>";
+            echo "Owner: " . $home['Owner'] . "<br>";
+            echo "Rooms: " . $home['Rooms'] . "<br>";
+            echo "Bathrooms: " . $home['Bathrooms'] . "<br>";
+            echo "Floors: " . $home['Floors'] . "<br>";
+            echo "Area: " . $home['Area'] . "<br>";
+            echo "Contact: " . $home['Contact'] . "<br>";
+            echo "<a href='details.php?id=" . $home['id'] . "'>More Details</a>"; // Use $row['ID'] here
+            echo "</li>";
+        }
+        echo "</ul>";
+    }
+    ?>
+</div>
+
+
+
 
 <?php // Include the footer
 include('footer.php');
