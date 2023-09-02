@@ -1,10 +1,18 @@
 <?php
 include_once('connection.php');
 session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['username'])) {
+    // Redirect to a login page or display an error message
+    header("Location: login.php");
+    exit();
+}
+
 $username = $_SESSION['username'];
 ?>
 
-<?php // Include the footer
+<?php // Include the header
 include('header.php');
 ?>
 
@@ -31,4 +39,5 @@ include('header.php');
 
 <?php // Include the footer
 include('footer.php');
+session_destroy();
 ?>
