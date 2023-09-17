@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Askari Rentals</title>
     <link rel="icon" href="media/logo.png">
+
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Add custom CSS for hover effect -->
@@ -15,12 +16,16 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <!-- Include the Montserrat font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="extrastyle.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #4CAF50;">
     <div class="container">
         <a class="navbar-brand" href="#">
-            <img src="media/logo.png" alt="Logo" height="40">
+            <img src="media/logo.png" alt="Logo" height="100">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

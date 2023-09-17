@@ -36,6 +36,8 @@ include('header.php');
     </div>
 </div>
 
+<
+
 <!-- Homes list -->
 <div class="container mt-4">
     <h2>All Homes</h2>

@@ -1,0 +1,31 @@
+/* Font for the entire body of the website */
+body {
+    font-family: 'Montserrat', sans-serif; /* Montserrat is a modern sans-serif font */
+}
+
+/* Font for the headings (h1, h2, h3, etc.) */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif; /* Use Montserrat for headings as well */
+}
+
+/* Font for the logo in the navbar */
+.navbar-brand {
+    font-family: 'Montserrat', sans-serif; /* Apply Montserrat to the logo */
+}
+
+/* Font for the buttons */
+.btn {
+    font-family: 'Montserrat', sans-serif; /* Use Montserrat for buttons */
+}
+
+/* Font for specific elements where needed */
+/* Example: Give a different font to the footer text */
+.footer-text {
+    font-family: 'Open Sans', sans-serif; /* Open Sans is a readable sans-serif font */
+}
+
+.nav-link
+{
+    margin-right: 10px;
+}
+
