@@ -1,6 +1,6 @@
 <?php
 /**
- * using mysqli_connect for database connection
+ * behehehehehe
  */
 
 $databaseHost = 'localhost';
