@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="extrastyle.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #4CAF50;">
+<nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
         <a class="navbar-brand" href="#">
             <img src="media/logo.png" alt="Logo" height="100">

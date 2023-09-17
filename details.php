@@ -39,7 +39,7 @@ include_once('header.php');
                                 <h3><?php echo $home['Location']; ?></h3>
                                 <p><i class="fas fa-bed"></i> <?php echo $home['Rooms']; ?> Bedrooms</p>
                                 <p><i class="fas fa-map-marker-alt"></i> <?php echo $home['Location']; ?></p>
-                                <p><i class="fa fa-hand-holding-dollar"></i> <?php echo $home['Price']; ?></p>
+                                <p><i class="fa fa-hand-holding-dollar"></i> <?php echo $home['Price'].'pkr'; ?></p>
                                 <p><i class="fa fa-user"></i> <?php echo $home['Owner']; ?></p>
                                 <p><i class="fa fa-bathtub"></i> <?php echo $home['Bathrooms']; ?> Bathrooms</p>
                                 <p><i class="fa fa-layer-group"></i> <?php echo $home['Floors']; ?> Floors</p>
