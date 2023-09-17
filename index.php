@@ -13,30 +13,41 @@ $result = $mysqli->query($sql);
 include('header.php');
 ?>
 
-<!-- Add space between header items and search bar -->
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <form action="searchresults.php" method="POST" class="form-inline">
-                <input type="hidden" name="attribute" value="Location"> <!-- Default attribute -->
-                <select name="attribute" class="form-control mr-2">
-                    <option value="Location">Location</option>
-                    <option value="Price">Price</option>
-                    <option value="Owner">Owner</option>
-                    <option value="Rooms">Rooms</option>
-                    <option value="Bathrooms">Bathrooms</option>
-                    <option value="Floors">Floors</option>
-                    <option value="Area">Area</option>
-                    <option value="Contact">Contact</option>
-                </select>
-                <input type="text" name="search" placeholder="Search by attribute" class="form-control mr-2">
-                <button type="submit" class="btn btn-primary">Search</button>
-            </form>
+<!--Slider implementation lessssssssssssgoooooooooooooooooooooooooooo boiiiiiiiiiiiiiiiii-------->
+<div id="imageCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#imageCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#imageCarousel" data-slide-to="1"></li>
+        <li data-target="#imageCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Slides -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="media/statics/home-slider-1.png" alt="Image 1" class="d-block w-100">
         </div>
+        <div class="carousel-item">
+            <img src="media/statics/home-slider-2.png" alt="Image 2" class="d-block w-100">
+        </div>
+        <div class="carousel-item">
+            <img src="media/statics/home-slider-3.png" alt="Image 3" class="d-block w-100">
+        </div>
+        <!-- Add more slides with different images -->
     </div>
+
+    <!-- Controls -->
+    <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
 </div>
 
-<
+
 
 <!-- Homes list -->
 <div class="container mt-4">
@@ -74,7 +85,7 @@ include('header.php');
         $location = $locationRow['Location'];
         echo '<div class="row mb-3">';
         echo '<div class="col-md-12">';
-        echo '<h3>Location: ' . $location . '</h3>';
+        echo '<h3>Homes in ' . $location . '</h3>';
         echo '</div>';
         echo '</div>';
 
