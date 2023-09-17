@@ -34,3 +34,16 @@ h1, h2, h3, h4, h5, h6 {
 {
     margin-top: 80px;
 }
+
+/*media query for responsiveness*/
+@media (max-width: 768px) {
+    .nav-link
+    {
+        text-align: center;
+    }
+
+    .mt-4 h2
+    {
+        margin-top: 20px;
+    }
+}
