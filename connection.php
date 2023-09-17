@@ -4,7 +4,7 @@
  */
 
 $databaseHost = 'localhost';
-$databaseName = 'barabing';
+$databaseName = 'php';
 $databaseUsername = 'root';
 $databasePassword = '';
 
