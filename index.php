@@ -2,10 +2,10 @@
 session_start();
 include_once('connection.php');
 
-// fetching queries
+// Fetching queries
 $sql = "SELECT * FROM homes";
 
-//storage
+// Storage
 $result = $mysqli->query($sql);
 ?>
 
@@ -13,98 +13,95 @@ $result = $mysqli->query($sql);
 include('header.php');
 ?>
 
-<!--Search baaaaaaaaaar-->
-<div class="search-bar" style="text-align: center; margin-top: 20px;">
-    <form action="searchresults.php" method="POST" style="display: inline-block; background-color: #f2f2f2; padding: 10px; border-radius: 8px; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);">
-        <input type="hidden" name="attribute" value="Location"> <!-- Default attribute -->
-        <select name="attribute" style="padding: 5px; border: 1px solid #ccc; border-radius: 4px; margin-right: 5px;">
-            <option value="Location">Location</option>
-            <option value="Price">Price</option>
-            <option value="Owner">Owner</option>
-            <option value="Rooms">Rooms</option>
-            <option value="Bathrooms">Bathrooms</option>
-            <option value="Floors">Floors</option>
-            <option value="Area">Area</option>
-            <option value="Contact">Contact</option>
-        </select>
-        <input type="text" name="search" placeholder="Search by attribute" style="padding: 5px; border: 1px solid #ccc; border-radius: 4px; margin-right: 5px;">
-        <button type="submit" style="background-color: #007bff; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Search</button>
-    </form>
+<!-- Add space between header items and search bar -->
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form action="searchresults.php" method="POST" class="form-inline">
+                <input type="hidden" name="attribute" value="Location"> <!-- Default attribute -->
+                <select name="attribute" class="form-control mr-2">
+                    <option value="Location">Location</option>
+                    <option value="Price">Price</option>
+                    <option value="Owner">Owner</option>
+                    <option value="Rooms">Rooms</option>
+                    <option value="Bathrooms">Bathrooms</option>
+                    <option value="Floors">Floors</option>
+                    <option value="Area">Area</option>
+                    <option value="Contact">Contact</option>
+                </select>
+                <input type="text" name="search" placeholder="Search by attribute" class="form-control mr-2">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
 </div>
 
-<div class="homes-list">
+<!-- Homes list -->
+<div class="container mt-4">
     <h2>All Homes</h2>
-    <ul>
+    <div class="row">
         <?php
         // Loop through the results and display each home
         while ($row = $result->fetch_assoc()) {
-            echo "<li>";
+            echo '<div class="col-md-4 mb-4">';
+            echo '<div class="card">';
             if ($row['Picture'] == null || $row['Picture'] == '') {
                 // No image available
             } else {
-                echo "<img src='media/" . $row['Picture'] . "' style='width:100px;height:auto;' />";
+                echo "<img src='media/" . $row['Picture'] . "' class='card-img-top' style='height: 200px;' />";
             }
-            echo "<br>";
-            echo "Location: " . $row['Location'] . "<br>";
-            echo "Price: " . $row['Price'] . "<br>";
-            echo "Owner: " . $row['Owner'] . "<br>";
-            echo "Rooms: " . $row['Rooms'] . "<br>";
-            echo "Bathrooms: " . $row['Bathrooms'] . "<br>";
-            echo "Floors: " . $row['Floors'] . "<br>";
-            echo "Area: " . $row['Area'] . "<br>";
-            echo "Contact: " . $row['Contact'] . "<br>";
-            echo "<a href='details.php?id=" . $row['id'] . "'>More Details</a>"; // Use $row['ID'] here
-            echo "</li>";
+            echo '<div class="card-body">';
+            echo '<h5 class="card-title">Location: ' . $row['Location'] . '</h5>';
+            echo '<a href="details.php?id=' . $row['id'] . '" class="btn btn-primary">More Details</a>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
         }
         ?>
-    </ul>
+    </div>
 </div>
-<?php
-// displaying homes by location now
-$sql = "SELECT * FROM homes";
-$result = $mysqli->query($sql);
 
-// Grouping homes by location
-$homesByLocation = array();
-while ($row = $result->fetch_assoc()) {
-    $location = $row['Location'];
-    if (!isset($homesByLocation[$location])) {
-        $homesByLocation[$location] = array();
-    }
-    $homesByLocation[$location][] = $row;
-}
-?>
-<div class="homes-list">
+<!-- List homes by distinct locations -->
+<div class="container mt-4">
     <?php
-    foreach ($homesByLocation as $location => $locationHomes) {
-        echo "<h2>Homes in $location</h2>";
-        echo "<ul>";
-        foreach ($locationHomes as $home) {
-            echo "<li>";
-            if ($home['Picture'] == null || $home['Picture'] == '') {
+    // Query the database for distinct locations
+    $distinctLocationsSql = "SELECT DISTINCT Location FROM homes";
+    $distinctLocationsResult = $mysqli->query($distinctLocationsSql);
+
+    while ($locationRow = $distinctLocationsResult->fetch_assoc()) {
+        $location = $locationRow['Location'];
+        echo '<div class="row mb-3">';
+        echo '<div class="col-md-12">';
+        echo '<h3>Location: ' . $location . '</h3>';
+        echo '</div>';
+        echo '</div>';
+
+        echo '<div class="row">';
+
+        // Query homes in the current location
+        $homesInLocationSql = "SELECT * FROM homes WHERE Location = '$location'";
+        $homesInLocationResult = $mysqli->query($homesInLocationSql);
+
+        while ($homeRow = $homesInLocationResult->fetch_assoc()) {
+            echo '<div class="col-md-4 mb-4">';
+            echo '<div class="card">';
+            if ($homeRow['Picture'] == null || $homeRow['Picture'] == '') {
                 // No image available
             } else {
-                echo "<img src='media/" . $home['Picture'] . "' style='width:100px;height:auto;' />";
+                echo "<img src='media/" . $homeRow['Picture'] . "' class='card-img-top' style='height: 200px;' />";
             }
-            echo "<br>";
-            echo "Location: " . $home['Location'] . "<br>";
-            echo "Price: " . $home['Price'] . "<br>";
-            echo "Owner: " . $home['Owner'] . "<br>";
-            echo "Rooms: " . $home['Rooms'] . "<br>";
-            echo "Bathrooms: " . $home['Bathrooms'] . "<br>";
-            echo "Floors: " . $home['Floors'] . "<br>";
-            echo "Area: " . $home['Area'] . "<br>";
-            echo "Contact: " . $home['Contact'] . "<br>";
-            echo "<a href='details.php?id=" . $home['id'] . "'>More Details</a>"; // Use $row['ID'] here
-            echo "</li>";
+            echo '<div class="card-body">';
+            echo '<h5 class="card-title">Location: ' . $homeRow['Location'] . '</h5>';
+            echo '<a href="details.php?id=' . $homeRow['id'] . '" class="btn btn-primary">More Details</a>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
         }
-        echo "</ul>";
+
+        echo '</div>'; // Close row
     }
     ?>
 </div>
-
-
-
 
 <?php // Include the footer
 include('footer.php');

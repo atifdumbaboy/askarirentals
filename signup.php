@@ -36,20 +36,36 @@ if (isset($_POST['submit'])) {
 include('header.php');
 ?>
 
-    <div class="container">
-        <div class="centered-form">
-            <h1>Signup</h1>
-            <form method="post" action="">
-                <input type="text" placeholder="Name" name="name" required>
-                <input type="password" placeholder="Password" name="password" required>
-                <input type="password" placeholder="Confirm Password" name="confirm_password" required>
-                <input type="submit" value="Submit" name="submit">
-                <p style="text-align: center;"><?php echo $message; ?></p>
-            </form>  
+<div class="container-fluid min-vh-100">
+    <div class="row justify-content-center align-items-center min-vh-100">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Signup Form</div>
+                <div class="card-body">
+                    <form method="post" action="">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_password">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirm_password" placeholder="Confirm your password" name="confirm_password" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary btn-block" value="Submit" name="submit">
+                        </div>
+                    </form>
+                    <p class="text-center"><?php echo $message; ?></p>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
 <?php // Include the footer
 include('footer.php');
 ?>
-

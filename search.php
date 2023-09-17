@@ -27,21 +27,19 @@ if (isset($_GET['search'])) {
         // Use LIKE for non-numeric queries
         $searchSql = "SELECT * FROM homes WHERE $searchAttribute LIKE '%$searchQuery%'";
     }
-    
+
     // Execute search query
     $searchResult = $mysqli->query($searchSql);
 }
 ?>
 
-
 <?php // Include the header
 include('header.php');
 ?>
 
-
-<div class="search-bar" style="text-align: center; margin-top: 20px;">
-    <form action="" method="GET" style="display: inline-block; background-color: #f2f2f2; padding: 10px; border-radius: 8px; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);">
-        <select name="attribute" style="padding: 5px; border: 1px solid #ccc; border-radius: 4px; margin-right: 5px;">
+<div class="container mt-4">
+    <form action="" method="GET" class="form-inline justify-content-center">
+        <select name="attribute" class="form-control mr-2">
             <option value="Location">Location</option>
             <option value="Price">Price</option>
             <option value="Owner">Owner</option>
@@ -51,40 +49,48 @@ include('header.php');
             <option value="Area">Area</option>
             <option value="Contact">Contact</option>
         </select>
-        <input type="text" name="search" placeholder="Search by attribute" style="padding: 5px; border: 1px solid #ccc; border-radius: 4px; margin-right: 5px;">
-        <button type="submit" style="background-color: #007bff; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Search</button>
+        <input type="text" name="search" placeholder="Search by attribute" class="form-control mr-2">
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
 </div>
 
-
-<div class="homes-list">
+<div class="container mt-4 min-vh-100">
     <?php
     if (isset($searchResult)) {
-        echo "<h2>Search Results</h2>";
         if ($searchResult->num_rows > 0) {
-            echo "<ul>";
+            echo "<h2>Search Results</h2>";
+            echo '<div class="row">';
             while ($row = $searchResult->fetch_assoc()) {
-                echo "<li>";
-                if ($row['Picture'] == null || $row['Picture'] == '') {
-                    
-                } else {
-                    echo "<img src='media/" . $row['Picture'] . "' style='width:100px;height:auto;' />";
+                echo '<div class="col-md-4 mb-4">';
+                echo '<div class="card">';
+                if ($row['Picture'] != null && $row['Picture'] != '') {
+                    echo "<img src='media/" . $row['Picture'] . "' class='card-img-top' alt='Home Image' style='height: 200px;'>";
                 }
-                echo "<br>";
-                echo "Location: " . $row['Location'] . "<br>";
-                echo "Price: " . $row['Price'] . "<br>";
-                echo "Owner: " . $row['Owner'] . "<br>";
-                echo "Rooms: " . $row['Rooms'] . "<br>";
-                echo "Bathrooms: " . $row['Bathrooms'] . "<br>";
-                echo "Floors: " . $row['Floors'] . "<br>";
-                echo "Area: " . $row['Area'] . "<br>";
-                echo "Contact: " . $row['Contact'] . "<br>";
-                echo "</li>";
+                echo '<div class="card-body">';
+                echo '<h5 class="card-title">Location: ' . $row['Location'] . '</h5>';
+                echo '<p>Price: ' . $row['Price'] . '</p>';
+                echo '<p>Owner: ' . $row['Owner'] . '</p>';
+                echo '<p>Rooms: ' . $row['Rooms'] . '</p>';
+                echo '<p>Bathrooms: ' . $row['Bathrooms'] . '</p>';
+                echo '<p>Floors: ' . $row['Floors'] . '</p>';
+                echo '<p>Area: ' . $row['Area'] . '</p>';
+                echo '<p>Contact: ' . $row['Contact'] . '</p>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
             }
-            echo "</ul>";
+            echo '</div>'; // Close the row
         } else {
-            echo "<p>No results found.</p>";
+            echo "<h2>No results found.</h2>";
+            // Display a search emoji when no search has been performed
+            echo '<i class="far fa-frown display-4 mt-3 text-muted"></i>';
         }
+    } else {
+        // Display a search emoji when no search has been performed
+        echo '<div class="text-center mt-5">';
+        echo '<i class="far fa-smile display-4 text-muted"></i>';
+        echo '<h2 class="text-muted">Start your search above</h2>';
+        echo '</div>';
     }
     ?>
 </div>

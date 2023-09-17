@@ -44,24 +44,34 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-
 <?php // Include the header
 include('header.php');
 ?>
-    
-    <div class="container">
-        <div class="centered-form">
-            <h1>Login Form</h1>
-            <form method="post">
-                <input type="text" placeholder="Enter your name" name="name" required>
-                <input type="password" placeholder="Enter your password" name="password" required>
-                <input type="submit" value="Submit" name="submit">
-                <p style="text-align: center;"><?php echo $message; ?></p>
-            </form>
+
+<div class="container-fluid min-vh-100"> <!-- Ensure the main container fills at least the viewport height -->
+    <div class="row justify-content-center align-items-center min-vh-100"> <!-- Center content vertically -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Login Form</div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+                        <p class="text-center mt-3"><?php echo $message; ?></p>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-    
+</div>
+
 <?php // Include the footer
 include('footer.php');
 ?>
-

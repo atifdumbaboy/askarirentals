@@ -29,33 +29,56 @@ if ($searchResult->num_rows > 0) {
 include('header.php');
 ?>
 
-<div class="homes-list">
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form action="searchresults.php" method="POST" class="form-inline">
+                <input type="hidden" name="attribute" value="<?php echo $searchAttribute; ?>">
+                <select name="attribute" class="form-control mr-2">
+                    <option value="Location" <?php echo ($searchAttribute === 'Location') ? 'selected' : ''; ?>>Location</option>
+                    <option value="Price" <?php echo ($searchAttribute === 'Price') ? 'selected' : ''; ?>>Price</option>
+                    <option value="Owner" <?php echo ($searchAttribute === 'Owner') ? 'selected' : ''; ?>>Owner</option>
+                    <option value="Rooms" <?php echo ($searchAttribute === 'Rooms') ? 'selected' : ''; ?>>Rooms</option>
+                    <option value="Bathrooms" <?php echo ($searchAttribute === 'Bathrooms') ? 'selected' : ''; ?>>Bathrooms</option>
+                    <option value="Floors" <?php echo ($searchAttribute === 'Floors') ? 'selected' : ''; ?>>Floors</option>
+                    <option value="Area" <?php echo ($searchAttribute === 'Area') ? 'selected' : ''; ?>>Area</option>
+                    <option value="Contact" <?php echo ($searchAttribute === 'Contact') ? 'selected' : ''; ?>>Contact</option>
+                </select>
+                <input type="text" name="search" placeholder="Search by attribute" class="form-control mr-2" value="<?php echo $searchQuery; ?>">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4 min-vh-100">
     <h2>Search Results</h2>
-    <ul>
+    <div class="row">
         <?php
         if (!empty($results)) {
             foreach ($results as $row) {
-                echo "<li>";
+                echo '<div class="col-md-4 mb-4">';
+                echo '<div class="card">';
                 if ($row['Picture']) {
-                    echo "<img src='media/" . $row['Picture'] . "' style='width:100px;height:auto;' />";
+                    echo "<img src='media/" . $row['Picture'] . "' class='card-img-top' style='height: 200px;' />";
                 }
-                echo "<br>";
-                echo "Location: " . $row['Location'] . "<br>";
-                echo "Price: " . $row['Price'] . "<br>";
-                echo "Owner: " . $row['Owner'] . "<br>";
-                echo "Rooms: " . $row['Rooms'] . "<br>";
-                echo "Bathrooms: " . $row['Bathrooms'] . "<br>";
-                echo "Floors: " . $row['Floors'] . "<br>";
-                echo "Area: " . $row['Area'] . "<br>";
-                echo "Contact: " . $row['Contact'] . "<br>";
-                echo "</li>";
+                echo '<div class="card-body">';
+                echo '<h5 class="card-title">Location: ' . $row['Location'] . '</h5>';
+                echo '<p>Price: ' . $row['Price'] . '</p>';
+                echo '<a href="details.php?id=' . $row['id'] . '" class="btn btn-primary">More Details</a>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
             }
         } else {
-            echo "<p>No results found.</p>";
+            echo '<div class="col-md-12">';
+            echo '<p class="text-center">No results found.</p>';
+            echo '</div>';
         }
         ?>
-    </ul>
+    </div>
 </div>
+
 
 <?php
 // Include the footer
