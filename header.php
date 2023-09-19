@@ -36,7 +36,8 @@ if (isset($_SESSION['username'])) {
     <style>
         .navbar-light .navbar-nav .nav-link:hover {
             color: #fff; /* Change the text color on hover to white */
-            background-color: #4CAF50; /* Change the background color on hover to green */
+            background-color: #007bff; /* Change the background color on hover to green */
+            border-radius: 7%;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -46,7 +47,7 @@ if (isset($_SESSION['username'])) {
     <link rel="stylesheet" href="extrastyle.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light" style="background:linear-gradient(to bottom, lightseagreen, transparent)">
     <div class="container">
         <a class="navbar-brand" href="#">
             <img src="media/logo.png" alt="Logo" height="100">

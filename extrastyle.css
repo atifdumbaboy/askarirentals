@@ -8,7 +8,6 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif; /* Use Montserrat for headings as well */
 }
-
 /* Font for the logo in the navbar */
 .navbar-brand {
     font-family: 'Montserrat', sans-serif; /* Apply Montserrat to the logo */
@@ -29,17 +28,13 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 10px;
 }
 
-nav {
-    background: #4CAF50;
-}
-
-
-
 
 /* Carosaul timeeeeeeeeeeeeeee */
 .mt-4 h2 {
     margin-top: 80px;
 }
+
+
 
 /* Media query for responsiveness */
 @media (max-width: 768px) {
