@@ -7,7 +7,13 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
-    if ($password == $confirm_password) {
+    // Check if the username is already in use
+    $check_query = "SELECT * FROM users WHERE Name='$name'";
+    $check_result = $mysqli->query($check_query);
+
+    if ($check_result->num_rows > 0) {
+        $message = "Username already in use.";
+    } elseif ($password == $confirm_password) {
         // Hash the password for security
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 

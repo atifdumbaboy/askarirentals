@@ -1,3 +1,20 @@
+<?php
+// Check if $username is set in the session
+if (isset($_SESSION['username'])) {
+    // User is logged in
+    $username = $_SESSION['username'];
+    $loginNavItem = '<li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>';
+} else {
+    // User is not logged in
+    $loginNavItem = '<li class="nav-item">
+                        <a class="nav-link" href="login.php">Login</a>
+                    </li>';
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,9 +57,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="signup.php">Signup</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login</a>
-                </li>
+                <?php echo $loginNavItem; ?> <!-- Display Login or Logout nav-item -->
                 <li class="nav-item">
                     <a class="nav-link" href="search.php">
                         <i class="fa fa-search"></i>

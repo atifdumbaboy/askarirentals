@@ -67,5 +67,4 @@ include('header.php');
 
 <?php // Include the footer
 include('footer.php');
-session_destroy();
 ?>

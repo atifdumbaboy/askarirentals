@@ -6,7 +6,6 @@ $username = $_SESSION['username'];
 if (isset($_POST['submit'])) {
     $Location = $_POST['Location'];
     $Price = $_POST['Price'];
-    $Owner = $_POST['Owner'];
     $Contact = $_POST['Contact'];
     $Bathrooms = $_POST['Bathrooms'];
     $Rooms = $_POST['Rooms'];
@@ -22,7 +21,7 @@ if (isset($_POST['submit'])) {
     if (move_uploaded_file($file_tmp, $target_path)) {
         // Insert data into the database
         $sql = "INSERT INTO homes (Location, Price, Owner, Contact, Bathrooms, Rooms, Floors, Area, Picture) 
-                VALUES ('$Location', '$Price', '$Owner', '$Contact', '$Bathrooms', '$Rooms', '$Floors', '$Area', '$file_name')";
+                VALUES ('$Location', '$Price', '$username', '$Contact', '$Bathrooms', '$Rooms', '$Floors', '$Area', '$file_name')";
 
         if ($mysqli->query($sql) === TRUE) {
             // Successful insertion
