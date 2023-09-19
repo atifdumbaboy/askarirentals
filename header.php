@@ -3,18 +3,25 @@
 if (isset($_SESSION['username'])) {
     // User is logged in
     $username = $_SESSION['username'];
+    $dashboardNavItem = '<li class="nav-item">
+                            <a class="nav-link" href="dashboard.php">Dashboard</a>
+                        </li>';
     $loginNavItem = '<li class="nav-item">
                         <a class="nav-link" href="logout.php">Logout</a>
                     </li>';
+    $signupNavItem = ''; // Don't display the signup link when logged in
 } else {
     // User is not logged in
+    $dashboardNavItem = ''; // Don't display the dashboard link
     $loginNavItem = '<li class="nav-item">
                         <a class="nav-link" href="login.php">Login</a>
+                    </li>';
+    $signupNavItem = '<li class="nav-item">
+                        <a class="nav-link" href="signup.php">Signup</a>
                     </li>';
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,9 +61,8 @@ if (isset($_SESSION['username'])) {
                         <i class="fa fa-home"></i>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="signup.php">Signup</a>
-                </li>
+                <?php echo $dashboardNavItem; ?> <!-- Display Dashboard nav-item if logged in -->
+                <?php echo $signupNavItem; ?> <!-- Display Signup nav-item if not logged in -->
                 <?php echo $loginNavItem; ?> <!-- Display Login or Logout nav-item -->
                 <li class="nav-item">
                     <a class="nav-link" href="search.php">

@@ -10,6 +10,17 @@ if (!isset($_SESSION['username'])) {
 }
 
 $username = $_SESSION['username'];
+
+// Query to retrieve the user's profile picture filename
+$query = "SELECT `Profile Picture` FROM users WHERE Name='$username'";
+$result = $mysqli->query($query);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $profile_picture = $row['Profile Picture'];
+} else {
+    $profile_picture = ''; // Default profile picture if not found
+}
 ?>
 
 <?php // Include the header
@@ -18,10 +29,10 @@ include('header.php');
 
 <div class="container mt-5 min-vh-100">
     <div class="row">
-        <div class="col-md-12">
-            <div class="welcome text-center">
-                <h1>Welcome, <?php echo $username; ?>!</h1>
-            </div>
+        <div class="col-md-12 text-center">
+            <!-- Display the user's profile picture -->
+            <img src="media/profiles/<?php echo $profile_picture; ?>" alt="Profile Picture" class="img-fluid rounded-circle" style="max-width: 200px;">
+            <h1>Welcome, <?php echo $username; ?>!</h1>
         </div>
     </div>
     <div class="row">

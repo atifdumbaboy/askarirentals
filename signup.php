@@ -17,20 +17,39 @@ if (isset($_POST['submit'])) {
         // Hash the password for security
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO users (Name, Password) VALUES ('$name', '$hashed_password')";
-        if ($mysqli->query($sql)) {
-            // Set the delay in seconds before redirection (e.g., 3 seconds)
-            $delayInSeconds = 3;
+        // Handle profile picture upload
+        $profile_picture_name = ''; // Initialize an empty variable to store the image name
 
-            // Construct the Refresh header to redirect to the login page after the delay
-            header("Refresh: {$delayInSeconds}; url=login.php");
+        if (isset($_FILES['profile_picture'])) {
+            $profile_picture_tmp = $_FILES['profile_picture']['tmp_name'];
+            $profile_picture_name = $_FILES['profile_picture']['name'];
+            $target_directory = "media/profiles/";
 
-            // Display a message to inform the user about the redirection
-            $message = "Signup successful. Redirecting to the login page in {$delayInSeconds} seconds";
+            // Create a unique name for the uploaded image
+            $profile_picture_name = uniqid() . '_' . $profile_picture_name;
 
-            // Do not exit here, let the rest of the HTML render
-        } else {
-            echo "Error: " . $sql . "<br>" . $mysqli->error;
+            $target_path = $target_directory . $profile_picture_name;
+
+            if (move_uploaded_file($profile_picture_tmp, $target_path)) {
+                // Insert data into the database
+                $sql = "INSERT INTO users (Name, Password, `Profile Picture`) 
+                        VALUES ('$name', '$hashed_password', '$profile_picture_name')";
+
+                if ($mysqli->query($sql)) {
+                    // Set the delay in seconds before redirection (e.g., 3 seconds)
+                    $delayInSeconds = 3;
+
+                    // Construct the Refresh header to redirect to the login page after the delay
+                    header("Refresh: {$delayInSeconds}; url=login.php");
+
+                    // Display a message to inform the user about the redirection
+                    $message = "Signup successful. Redirecting to the login page in {$delayInSeconds} seconds";
+                } else {
+                    echo "Error: " . $sql . "<br>" . $mysqli->error;
+                }
+            } else {
+                echo "Error moving the uploaded profile picture.";
+            }
         }
     } else {
         $message = "Passwords do not match.";
@@ -48,7 +67,7 @@ include('header.php');
             <div class="card">
                 <div class="card-header">Signup Form</div>
                 <div class="card-body">
-                    <form method="post" action="">
+                    <form method="post" action="" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name" required>
@@ -60,6 +79,10 @@ include('header.php');
                         <div class="form-group">
                             <label for="confirm_password">Confirm Password</label>
                             <input type="password" class="form-control" id="confirm_password" placeholder="Confirm your password" name="confirm_password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profile_picture">Profile Picture</label>
+                            <input type="file" class="form-control" id="profile_picture" name="profile_picture" accept="image/*">
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary btn-block" value="Submit" name="submit">
