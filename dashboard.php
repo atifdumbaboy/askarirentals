@@ -53,24 +53,27 @@ include('header.php');
             <div class="row">
                 <?php
                 // Loop through the results and display each home
+                // Display homes owned by the logged-in user
                 while ($home_row = $homes_result->fetch_assoc()) {
                     echo '<div class="col-md-4 mb-4">';
                     echo '<div class="card">';
                     if ($home_row['Picture'] == null || $home_row['Picture'] == '') {
                         // No image available
                     } else {
-                        echo "<img src='media/" . $home_row['Picture'] . "' class='card-img-top' style='height: 200px;' />";
+                        echo "<img src='media/homes/" . $home_row['Picture'] . "' class='card-img-top' style='height: 200px;' />";
+                        // Add a forward slash here ---------^
                     }
                     echo '<div class="card-body">';
                     echo '<h5 class="card-title">Location: ' . $home_row['Location'] . '</h5>';
                     // You can add more details here as needed
                     echo '<a href="details.php?id=' . $home_row['id'] . '" class="btn btn-primary">More Details</a>';
-                    echo '<a href="edit_home.php?id=' . $home_row['id'] . '" class="btn btn-primary" style="margin-left:20px;"><i  class="fa fa-pen-to-square"></i></a>';
-                    echo '<a href="delete_home.php?id=' . $home_row['id'] . '" class="btn btn-primary" style="margin-left:20px;color: red;"><i  class="fa fa-red fa-trash"></i></a>';
+                    echo '<a href="edit_home.php?id=' . $home_row['id'] . '" class="btn btn-primary" style="margin-left:20px;"><i class="fa fa-pen-to-square"></i></a>';
+                    echo '<a href="delete_home.php?id=' . $home_row['id'] . '" class="btn btn-primary" style="margin-left:20px;color: red;"><i class="fa fa-red fa-trash"></i></a>';
                     echo '</div>';
                     echo '</div>';
                     echo '</div>';
                 }
+
                 ?>
             </div>
 

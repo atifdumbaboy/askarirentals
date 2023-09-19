@@ -61,7 +61,7 @@ include('header.php');
             if ($row['Picture'] == null || $row['Picture'] == '') {
                 // No image available
             } else {
-                echo "<img src='media/" . $row['Picture'] . "' class='card-img-top' style='height: 200px;' />";
+                echo "<img src='media/homes/" . $row['Picture'] . "' class='card-img-top' style='height: 200px;' />";
             }
             echo '<div class="card-body">';
             echo '<h5 class="card-title">Location: ' . $row['Location'] . '</h5>';
@@ -101,7 +101,7 @@ include('header.php');
             if ($homeRow['Picture'] == null || $homeRow['Picture'] == '') {
                 // No image available
             } else {
-                echo "<img src='media/" . $homeRow['Picture'] . "' class='card-img-top' style='height: 200px;' />";
+                echo "<img src='media/homes/" . $homeRow['Picture'] . "' class='card-img-top' style='height: 200px;' />";
             }
             echo '<div class="card-body">';
             echo '<h5 class="card-title">Location: ' . $homeRow['Location'] . '</h5>';

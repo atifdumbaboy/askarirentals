@@ -33,7 +33,7 @@ include_once('header.php');
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 text-center">
-                                <img src="media/<?php echo $home['Picture']; ?>" class="img-fluid details-image" alt="Home Image">
+                                <img src="media/homes/<?php echo $home['Picture']; ?>" class="img-fluid details-image" alt="Home Image">
                             </div>
                             <div class="col-md-6">
                                 <h3><?php echo $home['Location']; ?></h3>
@@ -64,7 +64,7 @@ include_once('header.php');
                             while ($relatedHome = $relatedHomesResult->fetch_assoc()) {
                                 ?>
                                 <div class="col-md-4 related-home">
-                                    <img src="media/<?php echo $relatedHome['Picture']; ?>" class="img-fluid" alt="Related Home Image">
+                                    <img src="media/homes/<?php echo $relatedHome['Picture']; ?>" class="img-fluid" alt="Related Home Image">
                                     <p><strong>Location:</strong> <?php echo $relatedHome['Location']; ?></p>
                                     <p><strong>Price:</strong> <?php echo $relatedHome['Price']; ?></p>
                                     <a href="details.php?id=<?php echo $relatedHome['id']; ?>" class="btn btn-primary">View Details</a>
@@ -78,7 +78,7 @@ include_once('header.php');
                             while ($randomHome = $randomHomesResult->fetch_assoc()) {
                                 ?>
                                 <div class="col-md-4 related-home">
-                                    <img src="media/<?php echo $randomHome['Picture']; ?>" class="img-fluid" alt="Random Home Image">
+                                    <img src="media/homes/<?php echo $randomHome['Picture']; ?>" class="img-fluid" alt="Random Home Image">
                                     <p><strong>Location:</strong> <?php echo $randomHome['Location']; ?></p>
                                     <p><strong>Price:</strong> <?php echo $randomHome['Price']; ?></p>
                                     <a href="details.php?id=<?php echo $randomHome['id']; ?>" class="btn btn-primary">View Details</a>

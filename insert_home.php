@@ -15,8 +15,11 @@ if (isset($_POST['submit'])) {
     $file_tmp = $_FILES['fileToUpload']['tmp_name'];
     $original_file_name = $_FILES['fileToUpload']['name'];
 
-    // Define a custom filename format
-    $custom_filename = 'home_' . $username . '_' . time() . '_' . uniqid() . '.' . pathinfo($original_file_name, PATHINFO_EXTENSION);
+    // Get the file extension from the original filename
+    $file_extension = pathinfo($original_file_name, PATHINFO_EXTENSION);
+
+    // Define a custom filename format with the file extension
+    $custom_filename = 'home_' . $username . '_' . time() . '_' . uniqid() . '.' . $file_extension;
 
     $target_directory = "media/homes/"; // Specify the target directory
     $target_path = $target_directory . $custom_filename;
@@ -36,6 +39,7 @@ if (isset($_POST['submit'])) {
         }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
