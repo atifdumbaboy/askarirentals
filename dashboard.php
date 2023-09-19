@@ -21,6 +21,9 @@ if ($result->num_rows > 0) {
 } else {
     $profile_picture = ''; // Default profile picture if not found
 }
+// Query to retrieve homes owned by the logged-in user
+$homes_query = "SELECT * FROM homes WHERE Owner='$username'";
+$homes_result = $mysqli->query($homes_query);
 ?>
 
 <?php // Include the header
@@ -74,7 +77,40 @@ include('header.php');
             </div>
         </div>
     </div>
+
+    <!--Your Listed homes-->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h2 class="text-center">Your Home Listings</h2>
+            <!-- Display homes owned by the logged-in user -->
+            <div class="row">
+                <?php
+                // Loop through the results and display each home
+                while ($home_row = $homes_result->fetch_assoc()) {
+                    echo '<div class="col-md-4 mb-4">';
+                    echo '<div class="card">';
+                    if ($home_row['Picture'] == null || $home_row['Picture'] == '') {
+                        // No image available
+                    } else {
+                        echo "<img src='media/" . $home_row['Picture'] . "' class='card-img-top' style='height: 200px;' />";
+                    }
+                    echo '<div class="card-body">';
+                    echo '<h5 class="card-title">Location: ' . $home_row['Location'] . '</h5>';
+                    // You can add more details here as needed
+                    echo '<a href="details.php?id=' . $home_row['id'] . '" class="btn btn-primary">More Details</a>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+                ?>
+            </div>
+
+        </div>
+    </div>
 </div>
+
+
+
 
 <?php // Include the footer
 include('footer.php');
