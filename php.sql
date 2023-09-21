@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2023 at 08:53 PM
+-- Generation Time: Sep 21, 2023 at 10:11 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -45,10 +45,9 @@ CREATE TABLE `homes` (
 --
 
 INSERT INTO `homes` (`id`, `Location`, `Price`, `Owner`, `Contact`, `Bathrooms`, `Rooms`, `Floors`, `Area`, `Picture`) VALUES
-(9, 'Askari 11', 200000000, 'Atif Ashraf', '03176182415', 2, 2, 2, '1 Karnal', '10-marla-house-for-sale-in-askari-11-lahore-for-rs-186-crore-132780-image-1-actual.jpg'),
-(10, 'Askari 9', 20000000, 'Waseem', '03053339909', 4, 6, 2, '1 Karnal', '02.jpg'),
-(11, 'Kashmir', 200000, 'Wasif', '03379382039', 2, 2, 1, '5 marla', 'GettyImages-176459402.jpg'),
-(12, 'Lahore', 2000000000, 'Atif Ashraf', '03176182415', 6, 6, 2, '1 Karnal', 'GettyImages-176459402.jpg');
+(27, 'Bannu', 2, 'Atif Ashraf', '567576', 2, 2, 2, '1 Karnal', 'home_Atif Ashraf_1695134504_6509b3289a47c.jpg'),
+(29, 'Askari 9', 2000000, 'Atif Ashraf', '03053339909', 6, 6, 4, '2 Karnal', 'home_Atif Ashraf_1695322128_650c90108228c.jpg'),
+(30, 'Askari 11', 5000000, 'Atif Ashraf', '03176182415', 4, 5, 2, '5 marla', 'home_Atif Ashraf_1695322708_650c925431945.jpg');
 
 -- --------------------------------------------------------
 
@@ -68,7 +67,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `Name`, `Password`, `Profile Picture`) VALUES
-(18, 'admin', '$2y$10$5PFBaRSAdD5jAIQ2Uj0BzeIrst8snrKPivtTDGtUikWEd6URXKrvi', NULL);
+(18, 'admin', '$2y$10$5PFBaRSAdD5jAIQ2Uj0BzeIrst8snrKPivtTDGtUikWEd6URXKrvi', NULL),
+(21, 'Atif Ashraf', '$2y$10$EkiGkhGcO56lf3.3JAqTiOYjQdU/ltWXjbDCFmpbHW/q5cMj3MJfm', 'Purple and Pink Illustration Youtube Profile Picture (1).png'),
+(22, 'wasif', '$2y$10$fEUTI3seM23ozUCW0nTBo.iXtz2ZjKu5VqSiCbsn/0UROCKa54siy', '6509d539756e3_Blue Modern Electricity Technology Initial Logo (2).png');
 
 --
 -- Indexes for dumped tables
@@ -94,13 +95,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `homes`
 --
 ALTER TABLE `homes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
