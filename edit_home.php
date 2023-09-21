@@ -42,7 +42,7 @@ if (isset($_GET['id'])) {
                 // Upload the new image
                 $file_tmp = $_FILES['fileToUpload']['tmp_name'];
                 $file_name = $_FILES['fileToUpload']['name'];
-                $target_directory = "media/";
+                $target_directory = "media/homes/";
                 $target_path = $target_directory . $file_name;
 
                 if (move_uploaded_file($file_tmp, $target_path)) {
