@@ -28,18 +28,13 @@ if ($result->num_rows > 0) {
 include('header.php');
 ?>
 
-<style>
-    img:hover
-    {
-        border: 4px solid #4CAF50;
-    }
-</style>
 
 <div class="container mt-5 min-vh-100">
     <div class="row">
         <div class="col-md-12 text-center dash">
             <!-- Display the user's profile picture -->
-            <img src="media/profiles/<?php echo $profile_picture; ?>" alt="Profile Picture" class="img-fluid rounded-circle" style="max-width: 200px;">
+            <img src="media/profiles/<?php echo $profile_picture; ?>" alt="Profile Picture" id="hoverBaby" class="img-fluid rounded-circle" style="max-width: 200px;" onmouseover="this.style.border='4px solid #4CAF50';"
+                 onmouseout="this.style.border='none';">
             <h1 style="margin-bottom: 40px; margin-top: 40px">Welcome, <?php echo $username; ?>!</h1>
         </div>
     </div>
@@ -53,9 +48,6 @@ include('header.php');
                     </div>
                     <div class="form-group">
                         <input type="number" class="form-control" name="Price" placeholder="Price" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="Owner" placeholder="Owner" required>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" name="Contact" placeholder="Contact No" required>

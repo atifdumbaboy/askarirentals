@@ -90,32 +90,39 @@ include('header.php');
     <div class="centered-form">
     <form method="POST" enctype="multipart/form-data">
     <!-- Display the current details in the form -->
-    <div class="form-group">
-        <input type="text" class="form-control" name="Location" placeholder="Location" value="<?php echo $home_data['Location']; ?>" required>
-    </div>
-    <div class="form-group">
-        <input type="number" class="form-control" name="Price" placeholder="Price" value="<?php echo $home_data['Price']; ?>" required>
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" name="Contact" placeholder="Contact No" value="<?php echo $home_data['Contact'];?>" required>
-    </div>
         <div class="form-group">
+            <label for="Location"><i class="fas fa-map-marker-alt"></i> Location</label>
+            <input type="text" class="form-control" name="Location" placeholder="Location" value="<?php echo $home_data['Location']; ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="Price"><i class="fas fa-hand-holding-dollar"></i> Price</label>
+            <input type="number" class="form-control" name="Price" placeholder="Price" value="<?php echo $home_data['Price']; ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="Contact"><i class="fas fa-phone"></i> Contact No</label>
+            <input type="text" class="form-control" name="Contact" placeholder="Contact No" value="<?php echo $home_data['Contact'];?>" required>
+        </div>
+        <div class="form-group">
+            <label for="Bathrooms"><i class="fas fa-bath"></i> Number of Bathrooms</label>
             <input type="number" class="form-control" name="Bathrooms" placeholder="Number of Bathrooms?" value="<?php echo $home_data['Bathrooms']; ?>" required>
         </div>
         <div class="form-group">
+            <label for="Rooms"><i class="fas fa-bed"></i> Number of Rooms</label>
             <input type="number" class="form-control" name="Rooms" placeholder="Number of Rooms?" value="<?php echo $home_data['Rooms']; ?>" required>
         </div>
         <div class="form-group">
+            <label for="Floors"><i class="fas fa-layer-group"></i> Number of Floors</label>
             <input type="number" class="form-control" name="Floors" placeholder="Number of Floors?" value="<?php echo $home_data['Floors']; ?>" required>
         </div>
         <div class="form-group">
+            <label for="Area"><i class="fas fa-home"></i> Area of House</label>
             <input type="text" class="form-control" name="Area" placeholder="Area of House?" value="<?php echo $home_data['Area']; ?>" required>
         </div>
         <!-- Display the current image -->
         <div class="form-group">
             <label for="currentPicture">Current Picture:</label>
             <?php if (!empty($home_data['Picture'])): ?>
-                <img src="media/<?php echo $home_data['Picture']; ?>" class="img-fluid" style="max-height: 200px;" alt="Current Picture">
+                <img src="media/homes/<?php echo $home_data['Picture']; ?>" class="img-fluid" style="max-height: 200px;" alt="Current Picture">
             <?php else: ?>
                 <p>No image available</p>
             <?php endif; ?>

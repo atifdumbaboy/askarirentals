@@ -3,9 +3,23 @@
 if (isset($_SESSION['username'])) {
     // User is logged in
     $username = $_SESSION['username'];
-    $dashboardNavItem = '<li class="nav-item">
-                            <a class="nav-link" href="dashboard.php">Dashboard</a>
-                        </li>';
+    $dashboardNavItem = ''; // Initialize the Dashboard nav-item
+    $editProfileNavItem = ''; // Initialize the Edit Profile nav-item
+
+    // Check if the current page is dashboard.php
+    $currentPage = basename($_SERVER['PHP_SELF']);
+    if ($currentPage === 'dashboard.php') {
+        // If on the dashboard, display a button for Edit Profile
+        $editProfileNavItem = '<li class="nav-item">
+                                <a class="nav-link" href="edit_profile.php">Edit Profile</a>
+                             </li>';
+    } else {
+        // If not on the dashboard, display Dashboard nav-item
+        $dashboardNavItem = '<li class="nav-item">
+                                <a class="nav-link" href="dashboard.php">Dashboard</a>
+                             </li>';
+    }
+
     $loginNavItem = '<li class="nav-item">
                         <a class="nav-link" href="logout.php">Logout</a>
                     </li>';
@@ -13,6 +27,7 @@ if (isset($_SESSION['username'])) {
 } else {
     // User is not logged in
     $dashboardNavItem = ''; // Don't display the dashboard link
+    $editProfileNavItem = ''; // Don't display the Edit Profile link
     $loginNavItem = '<li class="nav-item">
                         <a class="nav-link" href="login.php">Login</a>
                     </li>';
@@ -20,8 +35,10 @@ if (isset($_SESSION['username'])) {
                         <a class="nav-link" href="signup.php">Signup</a>
                     </li>';
 }
-
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +66,7 @@ if (isset($_SESSION['username'])) {
 <body>
 <nav class="navbar navbar-expand-lg navbar-light" style="background:linear-gradient(to bottom, lightseagreen, transparent)">
     <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="index.php">
             <img src="media/logo.png" alt="Logo" height="100">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,6 +80,7 @@ if (isset($_SESSION['username'])) {
                     </a>
                 </li>
                 <?php echo $dashboardNavItem; ?> <!-- Display Dashboard nav-item if logged in -->
+                <?php echo $editProfileNavItem; ?> <!-- Display Dashboard nav-item if logged in -->
                 <?php echo $signupNavItem; ?> <!-- Display Signup nav-item if not logged in -->
                 <?php echo $loginNavItem; ?> <!-- Display Login or Logout nav-item -->
                 <li class="nav-item">

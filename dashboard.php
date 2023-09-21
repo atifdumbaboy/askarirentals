@@ -34,7 +34,8 @@ include('header.php');
     <div class="row">
         <div class="col-md-12 text-center">
             <!-- Display the user's profile picture -->
-            <img src="media/profiles/<?php echo $profile_picture; ?>" alt="Profile Picture" class="img-fluid rounded-circle" style="max-width: 200px;">
+            <img src="media/profiles/<?php echo $profile_picture; ?>" alt="Profile Picture" class="img-fluid rounded-circle" style="max-width: 200px;" onmouseover="this.style.border='4px solid #4CAF50';"
+                 onmouseout="this.style.border='none';">
             <h1 style="margin-top: 40px; margin-bottom: 40px">Welcome, <?php echo $username; ?>!</h1>
         </div>
     </div>
