@@ -30,6 +30,22 @@ $homes_result = $mysqli->query($homes_query);
 include('header.php');
 ?>
 
+<style>
+    /* Style for the delete button */
+    .delete-button {
+        background-color: red;
+        border: 1px solid #ff0000; /* Red border */
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Shadow for 3D effect */
+    }
+
+    /* Style for the edit button (green) */
+    .btn-success {
+        background-color: green;
+        border: 1px solid #00cc00; /* Green border */
+        box-shadow: 2px 2px 5px rgba(0, 128, 0, 0.3); /* Shadow for 3D effect */
+    }
+</style>
+
 <div class="container mt-5 min-vh-100">
     <div class="row">
         <div class="col-md-12 text-center">
@@ -67,9 +83,9 @@ include('header.php');
                     echo '<div class="card-body">';
                     echo '<h5 class="card-title">Location: ' . $home_row['Location'] . '</h5>';
                     // You can add more details here as needed
-                    echo '<a href="details.php?id=' . $home_row['id'] . '" class="btn btn-primary">More Details</a>';
-                    echo '<a href="edit_home.php?id=' . $home_row['id'] . '" class="btn btn-primary" style="margin-left:20px;"><i class="fa fa-pen-to-square"></i></a>';
-                    echo '<a href="delete_home.php?id=' . $home_row['id'] . '" class="btn btn-primary" style="margin-left:20px;color: red;"><i class="fa fa-red fa-trash"></i></a>';
+                    echo '<a href="details.php?id=' . $home_row['id'] . '" class="btn btn-primary">Home Details</a>';
+                    echo '<a href="edit_home.php?id=' . $home_row['id'] . '" class="btn btn-success" style="margin-left: 20px;"><i class="fa fa-pen-to-square"></i></a>';
+                    echo '<a href="delete_home.php?id=' . $home_row['id'] . '" class="btn btn-danger delete-button" style="margin-left: 20px;"><i class="fa fa-trash"></i></a>';
                     echo '</div>';
                     echo '</div>';
                     echo '</div>';

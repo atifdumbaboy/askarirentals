@@ -73,7 +73,7 @@ include_once('header.php');
                             }
                         } else {
                             // If no related homes are found, display three random ones
-                            $randomHomesSql = "SELECT * FROM homes ORDER BY RAND() LIMIT 3";
+                            $randomHomesSql = "SELECT * FROM homes WHERE id != $homeId ORDER BY RAND() LIMIT 3";
                             $randomHomesResult = $mysqli->query($randomHomesSql);
                             while ($randomHome = $randomHomesResult->fetch_assoc()) {
                                 ?>
@@ -88,6 +88,7 @@ include_once('header.php');
                         }
                         ?>
                     </div>
+
                 </div>
                 <!-- End Related Homes Section -->
                 <?php

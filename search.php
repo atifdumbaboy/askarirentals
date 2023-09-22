@@ -64,7 +64,7 @@ include('header.php');
                 echo '<div class="col-md-4 mb-4">';
                 echo '<div class="card">';
                 if ($row['Picture'] != null && $row['Picture'] != '') {
-                    echo "<img src='media/" . $row['Picture'] . "' class='card-img-top' alt='Home Image' style='height: 200px;'>";
+                    echo "<img src='media/homes/" . $row['Picture'] . "' class='card-img-top' alt='Home Image' style='height: 200px;'>";
                 }
                 echo '<div class="card-body">';
                 echo '<h5 class="card-title">Location: ' . $row['Location'] . '</h5>';
@@ -75,6 +75,7 @@ include('header.php');
                 echo '<p>Floors: ' . $row['Floors'] . '</p>';
                 echo '<p>Area: ' . $row['Area'] . '</p>';
                 echo '<p>Contact: ' . $row['Contact'] . '</p>';
+                echo '<a href="details.php?id=' . $row['id'] . '" class="btn btn-primary">Home Details</a>';
                 echo '</div>';
                 echo '</div>';
                 echo '</div>';
