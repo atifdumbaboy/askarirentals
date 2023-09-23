@@ -31,22 +31,42 @@ include_once('header.php');
                 <!-- Start Bootstrap Card for Home Details -->
                 <div class="card home-details">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 text-center">
-                                <img src="media/homes/<?php echo $home['Picture']; ?>" class="img-fluid details-image" alt="Home Image">
+                        <?php if (isset($_SESSION['username'])) { ?>
+                            <!-- Display Home Details for Logged-In Users -->
+                            <div class="row">
+                                <div class="col-md-6 text-center">
+                                    <img src="media/homes/<?php echo $home['Picture']; ?>" class="img-fluid details-image" alt="Home Image">
+                                </div>
+                                <div class="col-md-6">
+                                    <h3><?php echo $home['Location']; ?></h3>
+                                    <p><i class="fas fa-bed"></i> <?php echo $home['Rooms']; ?> Bedrooms</p>
+                                    <p><i class="fas fa-map-marker-alt"></i> <?php echo $home['Location']; ?></p>
+                                    <p><i class="fa fa-hand-holding-dollar"></i> <?php echo $home['Price'].'pkr'; ?></p>
+                                    <p><i class="fa fa-user"></i> <?php echo $home['Owner']; ?></p>
+                                    <p><i class="fa fa-bathtub"></i> <?php echo $home['Bathrooms']; ?> Bathrooms</p>
+                                    <p><i class="fa fa-layer-group"></i> <?php echo $home['Floors']; ?> Floors</p>
+                                    <p><i class="fa fa-home"></i> <?php echo $home['Area']; ?></p>
+                                    <p><i class="fa fa-phone"></i> <?php echo $home['Contact']; ?></p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <h3><?php echo $home['Location']; ?></h3>
-                                <p><i class="fas fa-bed"></i> <?php echo $home['Rooms']; ?> Bedrooms</p>
-                                <p><i class="fas fa-map-marker-alt"></i> <?php echo $home['Location']; ?></p>
-                                <p><i class="fa fa-hand-holding-dollar"></i> <?php echo $home['Price'].'pkr'; ?></p>
-                                <p><i class="fa fa-user"></i> <?php echo $home['Owner']; ?></p>
-                                <p><i class="fa fa-bathtub"></i> <?php echo $home['Bathrooms']; ?> Bathrooms</p>
-                                <p><i class="fa fa-layer-group"></i> <?php echo $home['Floors']; ?> Floors</p>
-                                <p><i class="fa fa-house"></i> <?php echo $home['Area']; ?></p>
-                                <p><i class="fa fa-phone"></i> <?php echo $home['Contact']; ?></p>
+                        <?php } else { ?>
+                            <!-- Display Login Message and Buttons for Non-Logged-In Users -->
+                            <div class="text-center">
+                                <div class="row">
+                                    <div class="col-md-6 text-center">
+                                        <img src="media/homes/<?php echo $home['Picture']; ?>" class="img-fluid details-image" alt="Home Image">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3><?php echo $home['Location']; ?></h3>
+                                        <p><i class="fas fa-bed"></i> <?php echo $home['Rooms']; ?> Bedrooms</p>
+                                        <p><i class="fas fa-map-marker-alt"></i> <?php echo $home['Location']; ?></p>
+                                        <p><i class="fa fa-hand-holding-dollar"></i> <?php echo $home['Price'].'pkr'; ?></p>
+                                        <p><i class="fa fa-user"></i> <?php echo $home['Owner']; ?></p>
+                                        <a href="signup.php?homeId=<?php echo $homeId; ?>">Signup to view more details</a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
                 <!-- End Bootstrap Card for Home Details -->

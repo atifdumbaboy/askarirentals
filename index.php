@@ -2,16 +2,42 @@
 session_start();
 include_once('connection.php');
 
-// Fetching queries
+// Initialize sorting variables
+$sortBy = isset($_GET['sort']) ? $_GET['sort'] : ''; // Get the selected sorting option
+$orderBy = isset($_GET['order']) ? $_GET['order'] : 'ASC'; // Default sorting order
+
+// Construct the SQL query based on sorting options
 $sql = "SELECT * FROM homes";
 
-// Storage
+if (!empty($sortBy)) {
+    $sql .= " ORDER BY $sortBy $orderBy";
+}
+
+// Execute the query
 $result = $mysqli->query($sql);
 ?>
 
 <?php // Include the header
 include('header.php');
 ?>
+<style>
+    /* Custom styling for select elements */
+    .custom-select {
+        padding: 8px; /* Adjust padding as needed */
+        font-size: 16px; /* Adjust font size as needed */
+        border: 1px solid #ccc; /* Add a border */
+        border-radius: 4px; /* Add rounded corners */
+        width: 200px; /* Set the width as needed */
+        margin-bottom: none;
+    }
+
+    /* Style the selected option */
+    .custom-select option:checked {
+        background-color: #007bff; /* Background color for selected option */
+        color: #fff; /* Text color for selected option */
+    }
+
+</style>
 
 <!--Slider implementation lessssssssssssgoooooooooooooooooooooooooooo boiiiiiiiiiiiiiiiii-------->
 <div id="imageCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
@@ -47,9 +73,27 @@ include('header.php');
     </a>
 </div>
 
+<div class="container mt-4 text-center">
+    <form method="GET" action="" class="sorting-form">
+        <label for="sort">Sort By:</label>
+        <select name="sort" id="sort" class="custom-select sorting-select">
+            <option value="">Attribute</option>
+            <option value="Location">Location</option>
+            <option value="Price">Price</option>
+            <option value="Rooms">Rooms</option>
+            <option value="Floors">Floors</option>
+            <option value="Bathrooms">Bathrooms</option>
+        </select>
+        <label for="order">Order:</label>
+        <select name="order" id="order" class="custom-select sorting-select">
+            <option value="ASC">Ascending</option>
+            <option value="DESC">Descending</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Sort</button>
+    </form>
+</div>
 
-
-<!-- Homes list -->
+<!-- Add a form for selecting sorting options -->
 <div class="container mt-4">
     <h2>All Homes</h2>
     <div class="row">
@@ -65,7 +109,7 @@ include('header.php');
             }
             echo '<div class="card-body">';
             echo '<h5 class="card-title">Location: ' . $row['Location'] . '</h5>';
-            echo '<a href="details.php?id=' . $row['id'] . '" class="btn btn-primary">More Details</a>';
+            echo '<a href="details.php?id=' . $row['id'] . '" class="btn btn-primary">Home Details</a>';
             echo '</div>';
             echo '</div>';
             echo '</div>';
@@ -73,6 +117,8 @@ include('header.php');
         ?>
     </div>
 </div>
+</div>
+
 
 <!-- List homes by distinct locations -->
 <div class="container mt-4">
@@ -115,6 +161,7 @@ include('header.php');
     }
     ?>
 </div>
+
 
 <?php // Include the footer
 include('footer.php');

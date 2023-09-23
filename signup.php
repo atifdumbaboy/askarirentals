@@ -36,14 +36,16 @@ if (isset($_POST['submit'])) {
                         VALUES ('$name', '$hashed_password', '$profile_picture_name')";
 
                 if ($mysqli->query($sql)) {
-                    // Set the delay in seconds before redirection (e.g., 3 seconds)
-                    $delayInSeconds = 3;
+                    // Redirect the user to the appropriate page based on the session attribute 'homeId'
+                    session_start();
 
-                    // Construct the Refresh header to redirect to the login page after the delay
-                    header("Refresh: {$delayInSeconds}; url=login.php");
-
-                    // Display a message to inform the user about the redirection
-                    $message = "Signup successful. Redirecting to the login page in {$delayInSeconds} seconds";
+                    if (isset($_SESSION['homeId'])) {
+                        $homeId = $_SESSION['homeId'];
+                        header("Location: login.php?id=$homeId");
+                    } else {
+                        header("Location: dashboard.php");
+                    }
+                    exit();
                 } else {
                     echo "Error: " . $sql . "<br>" . $mysqli->error;
                 }
@@ -55,6 +57,14 @@ if (isset($_POST['submit'])) {
         $message = "Passwords do not match.";
     }
 }
+
+// Check if 'homeId' is present in the URL
+if (isset($_GET['homeId'])) {
+    // If it is, store it in a session variable
+    session_start();
+    $_SESSION['homeId'] = $_GET['homeId'];
+}
+
 ?>
 
 <?php // Include the header
@@ -86,6 +96,9 @@ include('header.php');
                         </div>
                         <div class="form-group">
                             <input type="submit" class="btn btn-primary btn-block" value="Submit" name="submit">
+                        </div>
+                        <div class="form-group">
+                            <a href="login.php<?php echo isset($_SESSION['homeId']) ? '?homeId=' . $_SESSION['homeId'] : ''; ?>">Already have an account?</a>
                         </div>
                     </form>
                     <p class="text-center"><?php echo $message; ?></p>

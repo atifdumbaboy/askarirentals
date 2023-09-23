@@ -27,8 +27,13 @@ if (isset($_POST['submit'])) {
             // Store user information in the session for later use
             $_SESSION['username'] = $name;
 
-            // Redirect to a specific page after successful login
-            header("Location: dashboard.php"); // Change 'dashboard.php' to your desired page
+            // Check if 'homeId' is present in the session
+            if (isset($_SESSION['homeId'])) {
+                $homeId = $_SESSION['homeId'];
+                header("Location: details.php?id=$homeId"); // Redirect to details.php with homeId
+            } else {
+                header("Location: dashboard.php"); // Redirect to dashboard.php if 'homeId' is not set
+            }
 
             exit(); // Make sure to exit after redirection
         } else {
@@ -42,6 +47,7 @@ if (isset($_POST['submit'])) {
     // Close the statement
     mysqli_stmt_close($stmt);
 }
+
 ?>
 
 <?php // Include the header
