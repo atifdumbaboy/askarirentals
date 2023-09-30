@@ -105,6 +105,13 @@ include('header.php');
                     <div class="form-group text-center">
                         <input type="submit" class="btn btn-primary" name="update" value="Update Profile">
                     </div>
+                    <div class="form-group text-center">
+                        <p>Permanently Delete Your Profile Here</p>
+                    </div>
+                    <!-- Add a button to trigger profile deletion -->
+                    <div class="form-group text-center">
+                        <a href="delete_profile.php" class="btn btn-danger" role="button">Delete Profile</a>
+                    </div>
                 </form>
                 <p class="text-center"><?php echo isset($message) ? $message : ''; ?></p>
             </div>
