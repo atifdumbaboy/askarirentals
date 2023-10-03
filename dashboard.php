@@ -156,7 +156,7 @@ include('header.php');
     <!-- All users listings -->
     <?php
     $user_my_nig = false;
-    if ($All_users_result != null && $user_my_nig != true) {
+    if ($All_users_result != null && $user_my_nig!=true) {
         echo '<div class="container mt-5">';
         echo '<h2 class="text-center mb-4">All Users</h2>';
         echo '<div class="row">';
