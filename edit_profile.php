@@ -27,7 +27,7 @@ if (isset($_POST['update'])) {
         if (!empty($_FILES['profile_picture']['name'])) {
             // Handle profile picture upload
             $profilePictureTmp = $_FILES['profile_picture']['tmp_name'];
-            $profilePictureName = $_FILES['profile_picture']['name'];
+            $profilePictureName = $username . "_" . time() . ".jpg"; // Unique name based on "Name" column and timestamp
             $targetDirectory = "media/profiles/";
             $profilePicturePath = $targetDirectory . $profilePictureName;
 

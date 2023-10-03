@@ -9,14 +9,12 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-$username = $_SESSION['username'];
-
 // Check if an 'id' parameter is provided in the URL
 if (isset($_GET['id'])) {
     $home_id = $_GET['id'];
 
     // Query to retrieve the home details based on the provided 'id'
-    $query = "SELECT * FROM homes WHERE id='$home_id' AND Owner='$username'";
+    $query = "SELECT * FROM homes WHERE id='$home_id'";
     $result = $mysqli->query($query);
 
     if ($result->num_rows === 1) {
@@ -36,7 +34,7 @@ if (isset($_GET['id'])) {
             if (!empty($_FILES['fileToUpload']['name'])) {
                 // Delete the old image
                 if (!empty($home_data['Picture'])) {
-                    unlink("media/" . $home_data['Picture']);
+                    unlink("media/homes/" . $home_data['Picture']);
                 }
 
                 // Upload the new image
@@ -68,8 +66,8 @@ if (isset($_GET['id'])) {
             }
         }
     } else {
-        // Home with the provided ID does not belong to the user
-        echo "You do not have permission to edit this home.";
+        // Home with the provided ID does not exist
+        echo "Home not found.";
     }
 } else {
     // No 'id' parameter provided in the URL
@@ -79,7 +77,8 @@ if (isset($_GET['id'])) {
 // Include the header
 include('header.php');
 ?>
-    <div class="container mt-5 min-vh-100">
+
+<div class="container mt-5 min-vh-100">
     <div class="row">
         <div class="col-md-12 text-center">
             <h1>Edit Home</h1>
