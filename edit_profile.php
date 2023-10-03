@@ -10,6 +10,12 @@ if (!isset($_SESSION['username'])) {
 }
 
 $username = $_SESSION['username'];
+$message = '';
+
+// Retrieve the user's existing information
+$userQuery = "SELECT * FROM users WHERE Name='$username'";
+$userResult = $mysqli->query($userQuery);
+$userData = $userResult->fetch_assoc();
 
 // Check if the user wants to update their profile
 if (isset($_POST['update'])) {
@@ -44,6 +50,7 @@ if (isset($_POST['update'])) {
                 $updateQuery = "UPDATE users SET Password='$hashedPassword', `Profile Picture`='$profilePictureName' WHERE Name='$username'";
                 if ($mysqli->query($updateQuery)) {
                     $message = "Profile updated successfully.";
+                    header("Location: dashboard.php");
                 } else {
                     $message = "Error updating profile: " . $mysqli->error;
                 }
@@ -62,11 +69,6 @@ if (isset($_POST['update'])) {
         }
     }
 }
-
-// Retrieve the user's existing information
-$userQuery = "SELECT * FROM users WHERE Name='$username'";
-$userResult = $mysqli->query($userQuery);
-$userData = $userResult->fetch_assoc();
 ?>
 
 <?php // Include the header
