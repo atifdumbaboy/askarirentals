@@ -179,7 +179,10 @@ include('header.php');
             echo '<div class="card-body text-center">';
             echo '<h5 class="card-title">User: ' . $user_row['Name'] . '</h5>';
             // You can add more user details here as needed
-            echo '<a href="make_admin.php?id=' . $user_row['id'] . '" class="btn btn-primary">Make Admin</a>';
+            if($user_row['Role']!='Admin')
+            {
+                echo '<a href="make_admin.php?id=' . $user_row['id'] . '" class="btn btn-primary">Make Admin</a>';
+            }
             echo '<a href="edit_profile_admin.php?id=' . $user_row['id'] . '" class="btn btn-success mr-2" style="margin-left: 20px;"><i class="fas fa-edit"></i></a>';
             echo '<a href="delete_profile_admin.php?id=' . $user_row['id'] . '" class="btn btn-danger ml-2 delete-button" style="margin-left: 20px;"><i class="fas fa-trash"></i></a>';
             echo '</div>';
