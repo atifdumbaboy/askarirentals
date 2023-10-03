@@ -22,12 +22,14 @@ if (isset($_POST['update'])) {
     $newPassword = $_POST['password'];
     $confirmPassword = $_POST['confirm_password'];
 
-    // Check if passwords match
-    if ($newPassword !== $confirmPassword) {
+    // Check if a new password is provided and if it matches the confirmation
+    if (!empty($newPassword) && $newPassword !== $confirmPassword) {
         $message = "Passwords do not match.";
     } else {
-        // Hash the new password
-        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        // Hash the new password only if it's not empty
+        if (!empty($newPassword)) {
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        }
 
         // Check if a new profile picture is uploaded
         if (!empty($_FILES['profile_picture']['name'])) {
@@ -47,9 +49,13 @@ if (isset($_POST['update'])) {
 
             if (move_uploaded_file($profilePictureTmp, $profilePicturePath)) {
                 // Update the user's profile with the new password and profile picture
-                $updateQuery = "UPDATE users SET Password='$hashedPassword', `Profile Picture`='$profilePictureName' WHERE Name='$username'";
+                if (!empty($newPassword)) {
+                    $updateQuery = "UPDATE users SET Password='$hashedPassword', `Profile Picture`='$profilePictureName' WHERE Name='$username'";
+                } else {
+                    $updateQuery = "UPDATE users SET `Profile Picture`='$profilePictureName' WHERE Name='$username'";
+                }
+
                 if ($mysqli->query($updateQuery)) {
-                    $message = "Profile updated successfully.";
                     header("Location: dashboard.php");
                 } else {
                     $message = "Error updating profile: " . $mysqli->error;
@@ -57,7 +63,7 @@ if (isset($_POST['update'])) {
             } else {
                 $message = "Error moving the uploaded profile picture.";
             }
-        } else {
+        } elseif (!empty($newPassword)) {
             // Update the user's profile with the new password (without changing the profile picture)
             $updateQuery = "UPDATE users SET Password='$hashedPassword' WHERE Name='$username'";
             if ($mysqli->query($updateQuery)) {
@@ -66,6 +72,9 @@ if (isset($_POST['update'])) {
             } else {
                 $message = "Error updating profile: " . $mysqli->error;
             }
+        } else {
+            // No new password or profile picture provided
+            $message = "No changes made to the profile.";
         }
     }
 }
