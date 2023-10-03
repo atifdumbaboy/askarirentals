@@ -31,6 +31,14 @@ if (isset($_POST['update'])) {
             $targetDirectory = "media/profiles/";
             $profilePicturePath = $targetDirectory . $profilePictureName;
 
+            // Delete the old profile picture if it exists
+            if (!empty($userData['Profile Picture'])) {
+                $oldProfilePicturePath = $targetDirectory . $userData['Profile Picture'];
+                if (file_exists($oldProfilePicturePath)) {
+                    unlink($oldProfilePicturePath); // Delete the old file
+                }
+            }
+
             if (move_uploaded_file($profilePictureTmp, $profilePicturePath)) {
                 // Update the user's profile with the new password and profile picture
                 $updateQuery = "UPDATE users SET Password='$hashedPassword', `Profile Picture`='$profilePictureName' WHERE Name='$username'";

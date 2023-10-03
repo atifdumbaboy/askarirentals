@@ -2,15 +2,6 @@
 include_once('connection.php');
 session_start();
 
-// Check if the user is logged in as an admin
-if (!isset($_SESSION['username']) || $_SESSION['Role'] !== 'Admin') {
-    // Redirect to a login page or display an error message
-    header("Location: login.php");
-    exit();
-}
-
-$profileDeleted = false; // Initialize the flag
-
 // Check if an ID is passed via the URL
 if (isset($_GET['id'])) {
     $userId = $_GET['id']; // Retrieve the user's ID from the URL parameter
@@ -42,7 +33,8 @@ if (isset($_GET['id'])) {
                 $deleteQuery = "DELETE FROM users WHERE id='$userId'";
                 if ($mysqli->query($deleteQuery)) {
                     // Profile deleted successfully, set the flag
-                    $profileDeleted = true;
+                    header("Location: dashboard.php"); // Redirect to dashboard after deletion
+                    exit();
                 } else {
                     $message = "Error deleting profile: " . $mysqli->error;
                 }
@@ -62,17 +54,13 @@ if (isset($_GET['id'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- Rest of your HTML head section -->
-</head>
 <body>
 <div class="container">
     <div class="row">
         <div class="col-12">
             <div class="loading-message">
-                <?php if ($profileDeleted): ?>
-                    <i class="fas fa-trash fa-5x" style="color: red;"></i>
-                    <h2>Deleting Profile...</h2>
+                <?php if (isset($message)): ?>
+                    <h2><?php echo $message; ?></h2>
                 <?php else: ?>
                     <h2>Are you sure you want to delete this profile? This action cannot be undone.</h2>
                     <form method="POST">
