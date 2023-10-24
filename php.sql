@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2023 at 10:11 PM
+-- Generation Time: Oct 24, 2023 at 10:24 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -37,17 +37,20 @@ CREATE TABLE `homes` (
   `Rooms` int(11) NOT NULL,
   `Floors` int(11) NOT NULL,
   `Area` text NOT NULL,
-  `Picture` text NOT NULL
+  `Picture` text NOT NULL,
+  `Created` varchar(200) NOT NULL DEFAULT current_timestamp(),
+  `Slider` tinyint(1) DEFAULT NULL,
+  `SliderImage1` varchar(255) DEFAULT NULL,
+  `SliderImage2` varchar(255) DEFAULT NULL,
+  `SliderImage3` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='For the Homes';
 
 --
 -- Dumping data for table `homes`
 --
 
-INSERT INTO `homes` (`id`, `Location`, `Price`, `Owner`, `Contact`, `Bathrooms`, `Rooms`, `Floors`, `Area`, `Picture`) VALUES
-(27, 'Bannu', 2, 'Atif Ashraf', '567576', 2, 2, 2, '1 Karnal', 'home_Atif Ashraf_1695134504_6509b3289a47c.jpg'),
-(29, 'Askari 9', 2000000, 'Atif Ashraf', '03053339909', 6, 6, 4, '2 Karnal', 'home_Atif Ashraf_1695322128_650c90108228c.jpg'),
-(30, 'Askari 11', 5000000, 'Atif Ashraf', '03176182415', 4, 5, 2, '5 marla', 'home_Atif Ashraf_1695322708_650c925431945.jpg');
+INSERT INTO `homes` (`id`, `Location`, `Price`, `Owner`, `Contact`, `Bathrooms`, `Rooms`, `Floors`, `Area`, `Picture`, `Created`, `Slider`, `SliderImage1`, `SliderImage2`, `SliderImage3`) VALUES
+(34, 'Bannu', 4, 'Atif Ashraf', '03176182415', 2, 1, 2, '1 Karnal', 'pexels-pixabay-280222.jpg', '2023-09-24 14:37:22', 0, 'Atif Ashraf_34_1.jpeg', 'Atif Ashraf_34_2.png', 'Atif Ashraf_34_3.png');
 
 -- --------------------------------------------------------
 
@@ -59,17 +62,17 @@ CREATE TABLE `users` (
   `id` int(20) NOT NULL,
   `Name` text NOT NULL,
   `Password` text NOT NULL,
-  `Profile Picture` text DEFAULT NULL
+  `Profile Picture` text DEFAULT NULL,
+  `Role` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `Name`, `Password`, `Profile Picture`) VALUES
-(18, 'admin', '$2y$10$5PFBaRSAdD5jAIQ2Uj0BzeIrst8snrKPivtTDGtUikWEd6URXKrvi', NULL),
-(21, 'Atif Ashraf', '$2y$10$EkiGkhGcO56lf3.3JAqTiOYjQdU/ltWXjbDCFmpbHW/q5cMj3MJfm', 'Purple and Pink Illustration Youtube Profile Picture (1).png'),
-(22, 'wasif', '$2y$10$fEUTI3seM23ozUCW0nTBo.iXtz2ZjKu5VqSiCbsn/0UROCKa54siy', '6509d539756e3_Blue Modern Electricity Technology Initial Logo (2).png');
+INSERT INTO `users` (`id`, `Name`, `Password`, `Profile Picture`, `Role`) VALUES
+(39, 'Atif Ashraf', '$2y$10$Joz49svHGq9F5R05NFctkuQRYr.9K3I8uKjm18jbcYQC69fnlsG2u', 'Atif Ashraf_1696358596.jpg', 'Admin'),
+(41, 'King', '$2y$10$g2MNugXqLcvw.RTFBgyj4uQ5YDnSrSSAa78pqz9Q2GWnjfUe2Nuru', '65380fb540234_53cbc9cf4c32d668b68850c543b7f9c0-removebg-preview.png', 'User');
 
 --
 -- Indexes for dumped tables
@@ -95,13 +98,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `homes`
 --
 ALTER TABLE `homes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
