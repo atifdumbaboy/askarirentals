@@ -15,6 +15,11 @@ include_once('header.php');
         margin-top: 80px;
         margin-bottom: 80px;
     }
+     .related-home img {
+         max-height: 200px; /* Adjust this value to your desired maximum height */
+         width: auto; /* Maintain aspect ratio */
+     }
+
 </style>
 
 <div class="container-fluid center-vertically">
@@ -168,7 +173,7 @@ include_once('header.php');
                             while ($relatedHome = $relatedHomesResult->fetch_assoc()) {
                                 ?>
                                 <div class="col-md-4 related-home">
-                                    <img src="media/homes/<?php echo $relatedHome['Picture']; ?>" class="img-fluid"
+                                    <img src="media/homes/<?php echo $relatedHome['Picture']; ?>" class="img-fluid related-home-image"
                                          alt="Related Home Image">
                                     <p><strong>Location:</strong> <?php echo $relatedHome['Location']; ?></p>
                                     <p><strong>Price:</strong> <?php echo $relatedHome['Price']; ?></p>
@@ -184,7 +189,7 @@ include_once('header.php');
                             while ($randomHome = $randomHomesResult->fetch_assoc()) {
                                 ?>
                                 <div class="col-md-4 related-home">
-                                    <img src="media/homes/<?php echo $randomHome['Picture']; ?>" class="img-fluid"
+                                    <img src="media/homes/<?php echo $randomHome['Picture']; ?>" class="img-fluid related-home-image"
                                          alt="Random Home Image">
                                     <p><strong>Location:</strong> <?php echo $randomHome['Location']; ?></p>
                                     <p><strong>Price:</strong> <?php echo $randomHome['Price']; ?></p>
@@ -197,6 +202,7 @@ include_once('header.php');
                         ?>
                     </div>
                 </div>
+
                 <!-- End Related Homes Section -->
                 <?php
             } else {

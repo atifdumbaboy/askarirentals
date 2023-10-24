@@ -45,7 +45,7 @@ if (isset($_GET['id'])) {
                             $updateQuery = "UPDATE homes SET $sliderImageColumn='$newFileName.$fileExtension' WHERE id='$home_id'";
                             if ($mysqli->query($updateQuery)) {
                                 // Update successful
-
+                                header("Location: details.php?id=$home_id"); // Redirect to details.
                             } else {
                                 echo "Error updating slider image: " . $mysqli->error;
                             }
