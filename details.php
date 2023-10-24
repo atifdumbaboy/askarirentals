@@ -35,18 +35,101 @@ include_once('header.php');
                             <!-- Display Home Details for Logged-In Users -->
                             <div class="row">
                                 <div class="col-md-6 text-center">
-                                    <img src="media/homes/<?php echo $home['Picture']; ?>" class="img-fluid details-image" alt="Home Image">
+                                    <?php
+                                    // Check if slider images are present based on $home['Slider']
+                                    if ($home['Slider'] !== NULL) {
+                                        // Main home image and slider images in the carousel
+                                        ?>
+                                        <div id="imageCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+                                            <!-- Indicators -->
+                                            <ol class="carousel-indicators">
+                                                <li data-target="#imageCarousel" data-slide-to="0" class="active"></li>
+                                                <?php
+                                                $sliderImages = [$home['SliderImage1'], $home['SliderImage2'], $home['SliderImage3']];
+                                                $sliderImages = array_filter($sliderImages, function ($image) {
+                                                    return !empty($image);
+                                                });
+                                                if (count($sliderImages) >= 3) {
+                                                    for ($i = 1; $i <= 3; $i++) {
+                                                        ?>
+                                                        <li data-target="#imageCarousel" data-slide-to="<?php echo $i; ?>"></li>
+                                                    <?php }
+                                                } else {
+                                                    // If there are fewer than 3 slider images, use the total count
+                                                    for ($i = 1; $i <= count($sliderImages); $i++) {
+                                                        ?>
+                                                        <li data-target="#imageCarousel" data-slide-to="<?php echo $i; ?>"></li>
+                                                    <?php }
+                                                }
+                                                ?>
+                                            </ol>
+
+                                            <!-- Slides -->
+                                            <div class="carousel-inner">
+                                                <div class="carousel-item active">
+                                                    <img src="media/homes/<?php echo $home['Picture']; ?>" alt="Home Image"
+                                                         class="d-block w-100">
+                                                </div>
+                                                <?php
+                                                if (count($sliderImages) >= 3) {
+                                                    for ($i = 0; $i < 3; $i++) {
+                                                        if (!empty($sliderImages[$i])) {
+                                                            ?>
+                                                            <div class="carousel-item">
+                                                                <img src="media/homes/sliders/<?php echo $sliderImages[$i]; ?>"
+                                                                     alt="Slider Image <?php echo $i + 1; ?>"
+                                                                     class="d-block w-100">
+                                                            </div>
+                                                        <?php }
+                                                    }
+                                                } else {
+                                                    // If there are fewer than 3 slider images, use the total count
+                                                    for ($i = 0; $i < count($sliderImages); $i++) {
+                                                        if (!empty($sliderImages[$i])) {
+                                                            ?>
+                                                            <div class="carousel-item">
+                                                                <img src="media/homes/sliders/<?php echo $sliderImages[$i]; ?>"
+                                                                     alt="Slider Image <?php echo $i + 1; ?>"
+                                                                     class="d-block w-100">
+                                                            </div>
+                                                        <?php }
+                                                    }
+                                                }
+                                                ?>
+                                            </div>
+
+                                            <!-- Controls -->
+                                            <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+                                                <span class="carousel-control-prev-icon" ariahidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+                                                <span class="carousel-control-next-icon" ariahidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
+                                    <?php } else {
+                                        // If there are no slider images, show only the main image
+                                        ?>
+                                        <img src="media/homes/<?php echo $home['Picture']; ?>"
+                                             class="img-fluid details-image" alt="Home Image">
+                                    <?php } ?>
                                 </div>
                                 <div class="col-md-6">
                                     <h3><?php echo $home['Location']; ?></h3>
                                     <p><i class="fas fa-bed"></i> <?php echo $home['Rooms']; ?> Bedrooms</p>
                                     <p><i class="fas fa-map-marker-alt"></i> <?php echo $home['Location']; ?></p>
-                                    <p><i class="fa fa-hand-holding-dollar"></i> <?php echo $home['Price'].'pkr'; ?></p>
+                                    <p><i class="fa fa-hand-holding-dollar"></i> <?php echo $home['Price'] . 'pkr'; ?></p>
                                     <p><i class="fa fa-user"></i> <?php echo $home['Owner']; ?></p>
                                     <p><i class="fa fa-bathtub"></i> <?php echo $home['Bathrooms']; ?> Bathrooms</p>
                                     <p><i class="fa fa-layer-group"></i> <?php echo $home['Floors']; ?> Floors</p>
                                     <p><i class="fa fa-home"></i> <?php echo $home['Area']; ?></p>
                                     <p><i class="fa fa-phone"></i> <?php echo $home['Contact']; ?></p>
+                                    <?php
+                                    if ($_SESSION['username'] == $home['Owner'] && $home['Slider'] === NULL) {
+                                        echo '<a href="add_slider.php?id=' . $home['id'] . '" class="btn btn-primary">Add Slider Images</a>';
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         <?php } else { ?>
@@ -54,15 +137,16 @@ include_once('header.php');
                             <div class="text-center">
                                 <div class="row">
                                     <div class="col-md-6 text-center">
-                                        <img src="media/homes/<?php echo $home['Picture']; ?>" class="img-fluid details-image" alt="Home Image">
+                                        <img src="media/homes/<?php echo $home['Picture']; ?>"
+                                             class="img-fluid details-image" alt="Home Image">
                                     </div>
                                     <div class="col-md-6">
                                         <h3><?php echo $home['Location']; ?></h3>
                                         <p><i class="fas fa-bed"></i> <?php echo $home['Rooms']; ?> Bedrooms</p>
                                         <p><i class="fas fa-map-marker-alt"></i> <?php echo $home['Location']; ?></p>
-                                        <p><i class="fa fa-hand-holding-dollar"></i> <?php echo $home['Price'].'pkr'; ?></p>
+                                        <p><i class="fa fa-hand-holding-dollar"></i> <?php echo $home['Price'] . 'pkr'; ?></p>
                                         <p><i class="fa fa-user"></i> <?php echo $home['Owner']; ?></p>
-                                        <a href="signup.php?homeId=<?php echo $homeId; ?>">Signup to view more details</a>
+                                        <a href="signup.php?homeId=<?php echo $homeId; ?>">Signup to View More Images and Details</a>
                                     </div>
                                 </div>
                             </div>
@@ -84,10 +168,12 @@ include_once('header.php');
                             while ($relatedHome = $relatedHomesResult->fetch_assoc()) {
                                 ?>
                                 <div class="col-md-4 related-home">
-                                    <img src="media/homes/<?php echo $relatedHome['Picture']; ?>" class="img-fluid" alt="Related Home Image">
+                                    <img src="media/homes/<?php echo $relatedHome['Picture']; ?>" class="img-fluid"
+                                         alt="Related Home Image">
                                     <p><strong>Location:</strong> <?php echo $relatedHome['Location']; ?></p>
                                     <p><strong>Price:</strong> <?php echo $relatedHome['Price']; ?></p>
-                                    <a href="details.php?id=<?php echo $relatedHome['id']; ?>" class="btn btn-primary">View Details</a>
+                                    <a href="details.php?id=<?php echo $relatedHome['id']; ?>"
+                                       class="btn btn-primary">View Details</a>
                                 </div>
                                 <?php
                             }
@@ -98,10 +184,12 @@ include_once('header.php');
                             while ($randomHome = $randomHomesResult->fetch_assoc()) {
                                 ?>
                                 <div class="col-md-4 related-home">
-                                    <img src="media/homes/<?php echo $randomHome['Picture']; ?>" class="img-fluid" alt="Random Home Image">
+                                    <img src="media/homes/<?php echo $randomHome['Picture']; ?>" class="img-fluid"
+                                         alt="Random Home Image">
                                     <p><strong>Location:</strong> <?php echo $randomHome['Location']; ?></p>
                                     <p><strong>Price:</strong> <?php echo $randomHome['Price']; ?></p>
-                                    <a href="details.php?id=<?php echo $randomHome['id']; ?>" class="btn btn-primary">View Details</a>
+                                    <a href="details.php?id=<?php echo $randomHome['id']; ?>"
+                                       class="btn btn-primary">View Details</a>
                                 </div>
                                 <?php
                             }

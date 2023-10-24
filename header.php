@@ -53,7 +53,7 @@ if (isset($_SESSION['username'])) {
     <style>
         .navbar-light .navbar-nav .nav-link:hover {
             color: #fff; /* Change the text color on hover to white */
-            background-color: #007bff; /* Change the background color on hover to green */
+            background-color: #134cf5; /* Change the background color on hover to green */
             border-radius: 7%;
         }
     </style>
@@ -64,7 +64,7 @@ if (isset($_SESSION['username'])) {
     <link rel="stylesheet" href="extrastyle.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light" style="background:linear-gradient(to bottom, lightseagreen, transparent)">
+<nav class="navbar navbar-expand-lg navbar-light" style="background:springgreen;">
     <div class="container">
         <a class="navbar-brand" href="index.php">
             <img src="media/logo.png" alt="Logo" height="100">
