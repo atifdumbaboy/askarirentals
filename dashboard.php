@@ -183,6 +183,10 @@ include('header.php');
             {
                 echo '<a href="make_admin.php?id=' . $user_row['id'] . '" class="btn btn-primary">Make Admin</a>';
             }
+            else if($user_row['Role']='Admin')
+            {
+                echo '<a href="remove_admin.php?id=' . $user_row['id'] . '" class="btn btn-primary">Remove Admin</a>';
+            }
             echo '<a href="edit_profile_admin.php?id=' . $user_row['id'] . '" class="btn btn-success mr-2" style="margin-left: 20px;"><i class="fas fa-edit"></i></a>';
             echo '<a href="delete_profile_admin.php?id=' . $user_row['id'] . '" class="btn btn-danger ml-2 delete-button" style="margin-left: 20px;"><i class="fas fa-trash"></i></a>';
             echo '</div>';
