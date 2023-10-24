@@ -5,7 +5,7 @@ $username = $_SESSION['username'];
 
 // Check if an 'id' parameter is provided in the URL
 if (isset($_GET['id'])) {
-    $home_id = $_GET['id'];
+    $home_id = $_GET['id';
 
     // Query to retrieve the home details based on the provided 'id'
     $query = "SELECT * FROM homes WHERE id='$home_id' AND Owner='$username'";
@@ -26,6 +26,17 @@ if (isset($_GET['id'])) {
                 }
             }
 
+            // Delete associated slider images
+            for ($i = 1; $i <= 3; $i++) {
+                $sliderImage = $home_data["SliderImage$i"];
+                if (!empty($sliderImage)) {
+                    $sliderImagePath = "media/homes/sliders/" . $sliderImage;
+                    if (file_exists($sliderImagePath)) {
+                        unlink($sliderImagePath);
+                    }
+                }
+            }
+
             // Redirect to the dashboard or another page after successful deletion
             header("Location: dashboard.php");
             exit();
@@ -41,6 +52,7 @@ if (isset($_GET['id'])) {
     echo "Invalid request.";
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
