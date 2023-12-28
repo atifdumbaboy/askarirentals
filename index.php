@@ -48,7 +48,7 @@ include('header.php');
         <li data-target="#imageCarousel" data-slide-to="2"></li>
     </ol>
 
-    <!-- Slides -->
+    <!-- Slides --> 
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img src="media/statics/home-slider-1.png" alt="Image 1" class="d-block w-100">
